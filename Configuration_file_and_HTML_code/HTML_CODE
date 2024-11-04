@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Superset Dashboard</title>
+    <style>
+        /* Style for the iframe */
+        .dashboard-iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+        /* Style for the button */
+        .switch-button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Agricultural Production in India</h1>
+    <button class="switch-button" id="switchButton">Switch to Metabase</button>
+    <!-- Embed dashboard using iframe -->
+    <iframe id="dashboardIframe" class="dashboard-iframe" src="http://localhost:8080/superset/dashboard/p/Wp0ON0DZVKm/"></iframe>
+
+    <script>
+        let isSuperset = true;
+
+        document.getElementById('switchButton').onclick = function() {
+            const iframe = document.getElementById('dashboardIframe');
+            if (isSuperset) {
+                iframe.src ="http://localhost:1234/public/dashboard/681bc3c6-3856-4885-87f6-7d39487a6757"; // Metabase URL
+                this.innerText = 'Switch to Superset';
+            } else {
+                iframe.src = "http://localhost:8080/superset/dashboard/p/Wp0ON0DZVKm/"; // Superset URL
+                this.innerText = 'Switch to Metabase';
+            }
+            isSuperset = !isSuperset;
+        };
+    </script>
+</body>
+</html>
